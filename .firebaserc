@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ang-kanban": {
+      "hosting": {
+        "fbdemo": [
+          "ang-kanban"
+        ]
+      }
+    }
+  }
+}

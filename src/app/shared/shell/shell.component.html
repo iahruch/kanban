@@ -1,0 +1,65 @@
+<mat-sidenav-container>
+  <mat-sidenav
+     #drawer
+     class="sidenav"
+     fixedInViewport
+     [attr.role]="(isHandset$ | async) ? 'dialog': 'navigation'"
+     [mode]="(isHandset$ | async) ? 'over': 'side'"
+     [opened]="false"
+  >
+    <mat-nav-list>
+      <h2>Menu</h2>
+      <a mat-list-item [routerLink]="['/']" (click)="drawer.close()" >Home</a>
+      <a mat-list-item [routerLink]="['/login']" (click)="drawer.close()" >Login</a>
+      <a mat-list-item [routerLink]="['/kanban']" (click)="drawer.close()" >Kanban</a>
+      <a mat-list-item [routerLink]="['/customers']" (click)="drawer.close()">Customers</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content">
+    <mat-toolbar>
+      <button
+        type="button"
+        aria-label="Toggle button"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+
+      <span [ngClass]="{'logo': true, 'center-logo': isHandset$ | async}"  [routerLink]="['/']"> 🔥AngularFire </span>
+      <span [ngClass]="{'fill-space': !(isHandset$ | async)}" class="fill-space"> </span>
+      <div *ngIf="!(isHandset$ | async)">
+        <a mat-button [routerLink]="['/kanban']" > 🧮 Kanban</a>
+        <a mat-button [routerLink]="['/customers']"> ⚡ Customers</a>
+        <a mat-button [routerLink]="['/login']"> 🔑Login</a>
+      </div>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Dialog menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>info</mat-icon>
+          <span>🎂 Item 1 </span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>info</mat-icon>
+          <span>🍨 Item 2 </span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>info</mat-icon>
+          <span>🍯 Item 3 </span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>info</mat-icon>
+          <span>🥧 Item 4 </span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -1,0 +1,25 @@
+.email-login-page {
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+}
+.view-form {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+  &-group {
+    margin-bottom: 10px;
+  }
+  .server-error-message {
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .btn-submit {
+    margin-top: 15px;
+  }
+}

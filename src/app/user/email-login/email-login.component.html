@@ -1,0 +1,78 @@
+<mat-card class="email-login-page">
+
+  <div *ngIf="isSigup" class="view-form">
+    <h3>Create Account</h3>
+    <button mat-stroked-button (click)="changeType('login')">Returning user?</button>
+  </div>
+
+  <div *ngIf="isLogin" class="view-form">
+    <h3>Sign In</h3>
+    <button mat-stroked-button size="small" (click)="changeType('signup')">New user?</button>
+  </div>
+
+  <div *ngIf="isPasswordReset" class="view-form">
+    <h3>Reset password</h3>
+    <button mat-stroked-button size="small" (click)="changeType('login')">New user?</button>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+
+    <mat-form-field [color]="email.valid && 'accent'" class="form-group">
+      <input
+        matInput
+        formControlName="email"
+        type="email"
+        placeholder="Email"
+        autocomplete="off"
+      />
+      <mat-error *ngIf="email.invalid && email.dirty">
+        You must enter a valid email
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field [color]="password.valid && 'accent'" *ngIf="!isPasswordReset" class="form-group">
+      <input
+        matInput
+        formControlName="password"
+        type="password"
+        placeholder="Password"
+      />
+      <mat-error *ngIf="password.invalid && password.dirty">
+        Password must be at least 6 symbol
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field [color]="passwordDoesMatch? 'accent' :'warn'" *ngIf="isSigup" class="form-group">
+      <input
+        matInput
+        formControlName="passwordConfirm"
+        type="password"
+        placeholder="Confirm password"
+      />
+      <mat-error *ngIf="passwordConfirm.invalid && !passwordDoesMatch">
+        Password does not match
+      </mat-error>
+    </mat-form-field>
+
+    <mat-error *ngIf="serverMessage" class="server-error-message">  {{serverMessage}} </mat-error>
+
+    <button
+      mat-raised-button
+      [color]="'accent'"
+      type="submit"
+      [disabled]="form.invalid || !passwordDoesMatch || loading"
+      class="btn-submit"
+    >Sibmit</button>
+  </form>
+
+  <button
+    *ngIf="isPasswordReset"
+    mat-stroked-button
+    type="submit"
+    [disabled]="loading"
+
+  >
+    Send reset password
+  </button>
+
+</mat-card>
