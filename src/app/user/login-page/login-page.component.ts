@@ -9,6 +9,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class LoginPageComponent implements OnInit {
   constructor(public afAuth: AngularFireAuth) {}
   user: any;
+
   ngOnInit(): void {
     this.afAuth.authState.subscribe((user) => {
       this.user = user;

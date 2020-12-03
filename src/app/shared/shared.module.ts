@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 const components = [ShellComponent];
 
 const modules = [
@@ -26,6 +26,7 @@ const modules = [
   MatCardModule,
   MatInputModule,
   MatSnackBarModule,
+  DragDropModule,
 ];
 
 @NgModule({
