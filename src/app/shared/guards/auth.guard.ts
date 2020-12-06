@@ -20,6 +20,7 @@ export class AuthGuard implements CanActivate {
   ): Promise<boolean | UrlTree> {
     const user = await this.afAuth.currentUser;
     const isLoggedIn = !!user;
+    console.log(isLoggedIn);
 
     if (!isLoggedIn) {
       this.snack.authError();

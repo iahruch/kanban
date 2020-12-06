@@ -1,8 +1,8 @@
 <main class="login-page">
   <div *ngIf="!(afAuth.authState | async)" class="login-action">
 
-    <button class="google-btn" centre mat-stroked-button appGoogleSignin xmlns="http://www.w3.org/1999/html">
-      <img class="google-image" src="./../../../assets/google-icon.svg" />&nbsp;
+    <button class="google-btn" mat-stroked-button appGoogleSignin xmlns="http://www.w3.org/1999/html">
+      <img class="google-image" src="./../../../assets/google-icon.svg" alt="pic-google-btn" />&nbsp;
       Login with Google
     </button>
 
@@ -14,10 +14,7 @@
 
   <div *ngIf="(afAuth.authState | async) as user">
     <p>{{user.providerData[0]?.displayName}}</p>
-    <p>{{user.providerData[0]?.email}}</p>
-    <div>
-      <img  [src]="user.providerData[0]?.photoURL" />
-    </div>
+
     <button mat-stroked-button (click)="afAuth.signOut()">Log out</button>
   </div>
 

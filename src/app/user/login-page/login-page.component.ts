@@ -13,7 +13,6 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
     this.afAuth.authState.subscribe((user) => {
       this.user = user;
-      console.log(user);
     });
   }
 }

@@ -59,7 +59,7 @@ $fbdemo-warn: mat-palette($mat-red);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$fbdemo-theme: mat-light-theme((
+$fbdemo-theme: mat-dark-theme((
   color: (
     primary: $fbdemo-primary,
     accent: $fbdemo-accent,

@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-  CollectionReference,
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase';
 import { BoardInterface, TasksInterface } from './board.model';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -16,12 +12,11 @@ export class BoardService {
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {}
 
   async createBoard(data: BoardInterface) {
-    const user = this.afAuth.currentUser;
-
+    const user = await this.afAuth.currentUser;
     return this.db.collection('boards').add({
       ...data,
-      uid: user['uid'],
-      tasks: [{ description: 'Test data description', label: 'yellow' }],
+      uid: user.uid,
+      tasks: [{ description: 'Hello!', label: 'yellow' }],
     });
   }
 
@@ -45,21 +40,25 @@ export class BoardService {
       switchMap((user) => {
         if (user) {
           return this.db
-            .collection('boards', (ref) => {
-              ref.where('uid', '==', user.uid).orderBy('priority');
-            })
+            .collection<BoardInterface>('boards', (ref) =>
+              ref.where('uid', '==', user.uid).orderBy('priority')
+            )
             .valueChanges({ idField: 'id' });
         } else {
           return [];
         }
-      })
+      }),
+      tap((m) => console.log(m))
     );
   }
+
   sortBoards(boards: BoardInterface[]) {
     const db = firebase.firestore();
     const batch = db.batch();
     const refs = boards.map((b) => db.collection('boards').doc(b.id));
+
     refs.forEach((ref, idx) => batch.update(ref, { priority: idx }));
+    console.log('refs1 ', refs);
     batch.commit();
   }
 }
