@@ -13,7 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-const components = [ShellComponent];
+import { DeleteButtonComponent } from './delete-button/delete-button.component';
+const components = [ShellComponent, DeleteButtonComponent];
 
 const modules = [
   MatButtonModule,
